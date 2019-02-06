@@ -1,4 +1,4 @@
-# qol_report
+# Quality of Life Report
 
 ## Project setup
 ```
