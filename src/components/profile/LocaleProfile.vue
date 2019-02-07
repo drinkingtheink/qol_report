@@ -1,6 +1,7 @@
 <template>
   <section class="locale_profile">
     <h1>{{ currentLocale.matching_full_name }}</h1>
+    <p v-if="population">POPULATION: {{ Number(population).toLocaleString() }}</p>
 
     <button @click="updateCurrentLocale(null)">Clear Location</button>
   </section>
@@ -14,25 +15,34 @@ import axios from 'axios'
 
 export default {
   name: 'LocaleProfile',
+  data () {
+    return {
+      population: 0,
+      lat: null,
+      long: null
+    }
+  },
   computed: {
     ...mapState(['currentLocale']),
     basicInfoUrl () {
       return this.currentLocale ? this.currentLocale._links['city:item'].href : null
     }
   },
-  watch: {
-    basicInfoUrl () {
-      console.log(`LETS GET INFOOOOOOOOOOOOO`)
-      this.getBasicInfo(this.basicInfoUrl)
-    }
+  mounted () {
+    this.getBasicInfo(this.basicInfoUrl)
   },
   methods: {
     ...mapActions(['updateCurrentLocale']),
     getBasicInfo () {
-      console.log('lets do this }}}}}}}}}')
+      let vue = this
       axios.get(this.basicInfoUrl)
         .then(function (response) {
-          console.log(`${JSON.stringify(response)}`)
+          let data = response.data || {}
+          let locData = data.location || {}
+          let latLong = locData.latlong || {}
+          vue.lat = latLong.lat || null
+          vue.long = latLong.long || null
+          vue.population = data.population || null
         })
         .catch(function (error) {
           console.log(error);
