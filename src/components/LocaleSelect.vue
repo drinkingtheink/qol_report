@@ -4,7 +4,11 @@
     <input v-model="searchTerm" />
 
     <section class="search_option_gallery" v-if="searchOptions">
-      <div v-for="(option, index) in searchOptions" :key="`option_number_${index}`">{{ index }}</div>
+      <CitySearchOption 
+        v-for="(option, index) in searchOptions" 
+        :key="`option_number_${index}`"
+        :option="option"
+      ></CitySearchOption>
     </section>
   </div>
 </template>
@@ -12,14 +16,19 @@
 <script>
 /* eslint no-console: 0 */
 import axios from 'axios'
+import CitySearchOption from './search/CitySearchOption.vue'
 const searchUrl = 'https://api.teleport.org/api/cities/?search='
 
 export default {
   name: 'LocaleSelect',
+  components: {
+    CitySearchOption: CitySearchOption
+  },
   data () {
     return {
       searchTerm : null,
-      searchOptions: null
+      searchOptions: null,
+      searchFeedback: null
     }
   },
   watch: {

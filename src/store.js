@@ -9,8 +9,13 @@ export default new Vuex.Store({
   state: {
   	currentLocale: null
   },
+  actions: {
+    updateCurrentLocale ({commit}, locale) {
+      commit('updateCurrentLocale', locale)
+    }
+  },
   mutations: {
-  	updateCurrentLocale ({state}, location) {
+  	updateCurrentLocale (state, location) {
   		state.currentLocale = location
   	}
   }
