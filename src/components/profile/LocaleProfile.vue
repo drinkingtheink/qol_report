@@ -1,7 +1,7 @@
 <template>
   <section class="locale_profile">
     <h1>{{ currentLocale.matching_full_name }}</h1>
-    <p v-if="population">POPULATION: {{ Number(population).toLocaleString() }}</p>
+    <p v-if="population"><strong>POPULATION:</strong> {{ Number(population).toLocaleString() }}</p>
 
     <button @click="updateCurrentLocale(null)">Clear Location</button>
   </section>
@@ -19,7 +19,11 @@ export default {
     return {
       population: 0,
       lat: null,
-      long: null
+      long: null,
+      urbanAreaData: null,
+      qol: {
+        categories: null
+      }
     }
   },
   computed: {
@@ -39,14 +43,34 @@ export default {
         .then(function (response) {
           let data = response.data || {}
           let locData = data.location || {}
-          let latLong = locData.latlong || {}
-          vue.lat = latLong.lat || null
-          vue.long = latLong.long || null
+          let latLong = locData.latlon || {}
+          vue.lat = latLong.latitude || null
+          vue.long = latLong.longitude || null
           vue.population = data.population || null
+
+          let otherLinks = data._links || {}
+          let urbanAreaDataLocation = otherLinks['city:urban_area'] || {}
+          let urbanAreaDataUrl = urbanAreaDataLocation.href || null
+
+          if (urbanAreaDataUrl) {
+            vue.getUrbanAreaInfo(urbanAreaDataUrl)
+          } 
+
         })
         .catch(function (error) {
           console.log(error);
         });    
+    },
+    getUrbanAreaInfo (urbanAreaDataUrl) {
+      let vue = this
+      axios.get(`${urbanAreaDataUrl}scores/`)
+        .then(function (response) {
+          let data = response.data || {}
+          vue.qol.categories = data.categories || null
+        })
+        .catch(function (error) {
+          console.log(error);
+        });  
     }
   }
 }
