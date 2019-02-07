@@ -1,13 +1,74 @@
 <template>
   <div class="qol_category_display">
-    <h4>{{category.name}}</h4>
-    <p class="rating">{{category.score_out_of_10}} </p>
+    <h4 class="name">{{category.name}}</h4>
+    
+    <div class="scale_tray">
+    	<span 
+    		class="scale_fill"
+    		:style="generatedStyles(category)"
+    	></span>
+    	<span class="rating">{{roundRating(category.score_out_of_10)}} </span>
+    </div>
+    
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import '../../style/_palette.scss';
+
+.qol_category_display {
+	background-color: rgba($dark, .7);
+	margin: 0 .5rem .5rem 0;
+	padding-bottom: 2rem;
+}
+
+.name {
+	color: $color1;
+}
+
+.rating {
+	color: white;
+	display: inline-block;
+	position: absolute;
+	right: .5rem;
+	top: .2rem;
+}
+
+$scale_radius: 5px;
+
+.scale_tray {
+	background-color: $dark2;
+	height: 1.5em;
+	margin: 0 .5rem;
+	border-radius: $scale_radius;
+	position: relative;
+}
+
+.scale_fill {
+	display: inline-block;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	border-radius: $scale_radius;
+}
+</style>
+
 <script>
+/* eslint no-console: 0, no-mixed-spaces-and-tabs: 0 */
+
 export default {
   props: ['category'],
-  name: 'CategoryDisplay'
-}
+  name: 'CategoryDisplay',
+  methods: {
+  	roundRating (rating) {
+  		return Math.max( Math.round(rating * 10) / 10, 2.8 ).toFixed(2);
+  	},
+  	generatedStyles (category) {
+  		return {
+  			backgroundColor: `${category.color}`,
+  			width: `${category.score_out_of_10 * 10}%`
+  		}
+  	}
+  }
+};
 </script>

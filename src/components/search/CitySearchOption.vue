@@ -8,6 +8,8 @@
 </template>
 
 <script>
+/* eslint no-console: 0, no-mixed-spaces-and-tabs: 0 */
+
 import { mapState, mapActions } from 'vuex'
 export default {
   props: ['option'],
@@ -18,17 +20,18 @@ export default {
   methods: {
     ...mapActions(['updateCurrentLocale'])
   }
-}
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .city_search_option {
   padding: 1rem;
   border-bottom: rgba(#000, .1);
-}
 
-.city_search_option:hover {
-  font-weight: bold;
-  cursor: pointer;
+  &:hover {
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+  }
 }
 </style>

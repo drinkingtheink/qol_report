@@ -1,10 +1,13 @@
 <template>
   <div class="city_search">
     <h1>Search for a City</h1>
-    <input v-model="searchTerm" />
+
+    <div class="search_input_wrapper">
+      <input v-model="searchTerm" class="search_term_input" />
+    </div>
 
     <section class="search_option_gallery" v-if="searchOptions">
-      <h3 class="search_header"><strong>{{ optionsCount }}</strong> options found</h3>
+      <p class="search_options_header"><strong>{{ optionsCount }}</strong> options found</p>
       <CitySearchOption 
         v-for="(option, index) in searchOptions" 
         :key="`option_number_${index}`"
@@ -63,6 +66,31 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../style/_palette.scss';
 
+$component_width: 40%;
+
+.city_search {
+  h1 {
+    color: $color1;
+  }
+}
+
+.search_input_wrapper {
+  width: $component_width;
+  margin: 0 auto;
+}
+
+.search_options_header {
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(black, .1);
+}
+
+.search_option_gallery {
+  background-color: $grey1;
+  width: $component_width;
+  margin: 0 auto;
+}
 </style>

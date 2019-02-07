@@ -22,7 +22,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import './style/_base_styles.scss';
+@import './style/_palette.scss';
+@import './style/_forms.scss';
+@import './style/_bg_texture.scss';
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  @include bg_texture;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-size: 16pt;

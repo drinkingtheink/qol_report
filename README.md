@@ -1,5 +1,7 @@
 # Quality of Life Report
 
+## An exploration of Quality of Life and other data about Urban Areas, using Vue.js and Teleport API.
+
 ## Project setup
 ```
 npm install

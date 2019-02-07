@@ -1,13 +1,16 @@
 <template>
   <section class="locale_profile">
-    <h1>{{ currentLocale.matching_full_name }} 
-      <button @click="updateCurrentLocale(null)">Change</button>
-    </h1>
-    <p v-if="population"><strong>POPULATION:</strong> {{ Number(population).toLocaleString() }}</p>
+    <h1 class="location_headline">{{ currentLocale.matching_full_name }}</h1>
+    <p v-if="population" class="meta"><strong>POPULATION:</strong> {{ Number(population).toLocaleString() }}</p>
+    <p v-if="lat" class="meta"><strong>LAT:</strong> {{ lat }}</p>
+    <p v-if="long" class="meta"><strong>LONG:</strong> {{ long }}</p>
+
+    <p><button @click="updateCurrentLocale(null)">Change City</button></p>
 
     <section class="qol_categories" v-if="qol.categories">
       <CategoryDisplay
         v-for="(category, index) in qol.categories"
+        class="qol_category"
         :category="category"
         :key="`category_${index}_key`"
       >
@@ -92,7 +95,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../style/_palette.scss';
+
+.location_headline {
+  color: $color1;
+}
+
+.meta {
+  color: white;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
 .qol_categories {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 2em;
+}
+
+.qol_category {
+  width: 15%;
 }
 </style>
