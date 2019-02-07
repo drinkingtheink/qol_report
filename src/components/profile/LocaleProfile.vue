@@ -1,12 +1,15 @@
 <template>
   <section class="locale_profile">
-    <h1>{{ currentLocale.matching_full_name }}</h1>
+    <h1>{{ currentLocale.matching_full_name }} 
+      <button @click="updateCurrentLocale(null)">Change</button>
+    </h1>
     <p v-if="population"><strong>POPULATION:</strong> {{ Number(population).toLocaleString() }}</p>
 
     <section class="qol_categories" v-if="qol.categories">
       <CategoryDisplay
         v-for="(category, index) in qol.categories"
         :category="category"
+        :key="`category_${index}_key`"
       >
       </CategoryDisplay>
     </section>
@@ -85,5 +88,11 @@ export default {
         });  
     }
   }
-}
+};
 </script>
+
+<style lang="scss" scoped>
+.qol_categories {
+  display: flex;
+}
+</style>
