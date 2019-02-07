@@ -3,7 +3,15 @@
     <h1>{{ currentLocale.matching_full_name }}</h1>
     <p v-if="population"><strong>POPULATION:</strong> {{ Number(population).toLocaleString() }}</p>
 
-    <button @click="updateCurrentLocale(null)">Clear Location</button>
+    <section class="qol_categories" v-if="qol.categories">
+      <CategoryDisplay
+        v-for="(category, index) in qol.categories"
+        :category="category"
+      >
+      </CategoryDisplay>
+    </section>
+
+    <button @click="updateCurrentLocale(null)">Find a Different City</button>
   </section>
 </template>
 
@@ -12,9 +20,13 @@
 
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
+import CategoryDisplay from './CategoryDisplay.vue'
 
 export default {
   name: 'LocaleProfile',
+  components: {
+    CategoryDisplay: CategoryDisplay
+  },
   data () {
     return {
       population: 0,
