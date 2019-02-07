@@ -4,6 +4,7 @@
     <input v-model="searchTerm" />
 
     <section class="search_option_gallery" v-if="searchOptions">
+      <h3 class="search_header"><strong>{{ optionsCount }}</strong> options found</h3>
       <CitySearchOption 
         v-for="(option, index) in searchOptions" 
         :key="`option_number_${index}`"
@@ -28,6 +29,7 @@ export default {
     return {
       searchTerm : null,
       searchOptions: null,
+      optionsCount: null,
       searchFeedback: null
     }
   },
@@ -50,6 +52,7 @@ export default {
             let embeddedData = responseData._embedded || {}
             let citySearchResults = embeddedData[Object.keys(embeddedData)[0]] || []
             vue.searchOptions = citySearchResults
+            vue.optionsCount = response.data.count
           }
         })
         .catch(function (error) {

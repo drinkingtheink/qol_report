@@ -1,16 +1,23 @@
 <template>
   <div id="app">
-    <LocaleSelect msg="Welcome to Your Vue.js App"/>
+    <LocaleSelect v-if="!currentLocale"/>
+    <LocaleProfile v-else/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import LocaleSelect from './components/LocaleSelect.vue'
+import LocaleProfile from './components/profile/LocaleProfile.vue'
 
 export default {
   name: 'app',
   components: {
-    LocaleSelect
+    LocaleSelect,
+    LocaleProfile
+  },
+  computed: {
+    ...mapState(['currentLocale'])
   }
 };
 </script>

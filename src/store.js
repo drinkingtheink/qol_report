@@ -7,16 +7,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-  	currentLocale: null
+  	currentLocale: null,
+    localeBasicInfo: null,
+    localeQOLData: null
   },
   actions: {
     updateCurrentLocale ({commit}, locale) {
       commit('updateCurrentLocale', locale)
+    },
+    updateBasicInfo ({commit}, info) {
+      commit('updateBasicInfo', info)
     }
   },
   mutations: {
   	updateCurrentLocale (state, location) {
   		state.currentLocale = location
-  	}
+  	},
+    updateBasicInfo (state, info) {
+      state.localeBasicInfo = info
+    }
   }
 })
