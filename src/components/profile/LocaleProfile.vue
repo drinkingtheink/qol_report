@@ -157,11 +157,6 @@ $maxWidth: 95%;
     margin: 0 .5rem .5rem 0;
     padding: .5rem 1.5rem;
     border-radius: 5px;
-
-    &.population {
-      display: block;
-      width: auto;
-    }
   }
 }
 
