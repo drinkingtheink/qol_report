@@ -10,7 +10,10 @@
     <p><button @click="updateCurrentLocale(null)"><i class="fas fa-redo"></i>Change City</button></p>
 
     <section class="qol_aggregate" v-if="aggregateScore">
-      <h4>Aggregate Score</h4>
+      <h4>
+        Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
+      </h4>
+      
       <p class="aggregate_score_display">
         {{ aggregateScore }}
       </p>
@@ -59,6 +62,9 @@ export default {
     },
     categoriesFound () {
       return !!(this.categories && this.categories.length)
+    },
+    shortName () {
+      return this.currentLocale && this.currentLocale.matching_alternate_names ? this.currentLocale.matching_alternate_names[0].name : null
     }
   },
   watch: {
@@ -132,7 +138,7 @@ export default {
 @import '../../style/_palette.scss';
 @import '../../style/_mixins.scss';
 
-$maxWidth: 65%;
+$maxWidth: 95%;
 
 .location_headline {
   color: $color1;
@@ -142,7 +148,7 @@ $maxWidth: 65%;
 
 .meta {
   max-width: $maxWidth;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto 1rem auto;
   
   span {
     @include opaque_el;
@@ -176,13 +182,13 @@ $maxWidth: 65%;
   font-size: 4rem;
   color: white;
   font-weight: bold;
+  color: $color1;
 }
 
 .qol_categories {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0 2em;
 }
 
 .qol_category {
