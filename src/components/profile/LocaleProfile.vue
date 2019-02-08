@@ -1,9 +1,11 @@
 <template>
   <section class="locale_profile">
     <h1 class="location_headline">{{ currentLocale.matching_full_name }}</h1>
-    <p v-if="population" class="meta"><strong>POPULATION:</strong> {{ Number(population).toLocaleString() }}</p>
-    <p v-if="lat" class="meta"><strong>LAT:</strong> {{ lat }}</p>
-    <p v-if="long" class="meta"><strong>LONG:</strong> {{ long }}</p>
+    <p class="meta">
+      <span v-if="population" class="population">POPULATION: <strong>{{ Number(population).toLocaleString() }}</strong></span>
+      <span v-if="lat">LAT: <strong>{{ lat }}</strong></span>
+      <span v-if="long">LONG: <strong>{{ long }}</strong></span>
+    </p>
 
     <p><button @click="updateCurrentLocale(null)">Change City</button></p>
 
@@ -96,15 +98,31 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../style/_palette.scss';
+@import '../../style/_mixins.scss';
 
 .location_headline {
   color: $color1;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .meta {
-  color: white;
-  display: inline-block;
-  margin-right: 1rem;
+  max-width: 65%;
+  margin: 0 auto 2rem auto;
+  
+  span {
+    @include opaque_el;
+    color: white;
+    display: inline-block;
+    margin: 0 .5rem .5rem 0;
+    padding: .5rem 1.5rem;
+    border-radius: 5px;
+
+    &.population {
+      display: block;
+      width: auto;
+    }
+  }
 }
 
 .qol_categories {
@@ -115,6 +133,6 @@ export default {
 }
 
 .qol_category {
-  width: 15%;
+  width: 25%;
 }
 </style>

@@ -66,5 +66,6 @@ button {
 	&:hover {
 		background-color: darken( $color1, 10% );
 		cursor: pointer;
+    color: white;
 	}
 }

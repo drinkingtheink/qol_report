@@ -3,7 +3,7 @@
     <h1>Search for a City</h1>
 
     <div class="search_input_wrapper">
-      <input v-model="searchTerm" class="search_term_input" />
+      <input v-model="searchTerm" class="search_term_input" :placeholder="placeholder" />
     </div>
 
     <section class="search_option_gallery" v-if="searchOptions">
@@ -34,6 +34,11 @@ export default {
       searchOptions: null,
       optionsCount: null,
       searchFeedback: null
+    }
+  },
+  computed: {
+    placeholder () {
+      return 'What city do you want to learn about?'
     }
   },
   watch: {

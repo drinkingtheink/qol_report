@@ -15,9 +15,10 @@
 
 <style lang="scss" scoped>
 @import '../../style/_palette.scss';
+@import '../../style/_mixins.scss';
 
 .qol_category_display {
-	background-color: rgba($dark, .7);
+	@include opaque_el;
 	margin: 0 .5rem .5rem 0;
 	padding-bottom: 2rem;
 }
@@ -28,6 +29,7 @@
 
 .rating {
 	color: white;
+  text-shadow: 0 0 4px rgba(black, .3);
 	display: inline-block;
 	position: absolute;
 	right: .5rem;
@@ -39,7 +41,7 @@ $scale_radius: 5px;
 .scale_tray {
 	background-color: $dark2;
 	height: 1.5em;
-	margin: 0 .5rem;
+	margin: 0 1rem;
 	border-radius: $scale_radius;
 	position: relative;
 }

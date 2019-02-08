@@ -9,3 +9,12 @@ h4 {
 	transition: all .2s;
 }
 
+/* Reset margin/padding */
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
