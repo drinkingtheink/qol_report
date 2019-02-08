@@ -7,11 +7,18 @@
       <span v-if="long">LONG: <strong>{{ long }}</strong></span>
     </p>
 
-    <p><button @click="updateCurrentLocale(null)">Change City</button></p>
+    <p><button @click="updateCurrentLocale(null)"><i class="fas fa-redo"></i>Change City</button></p>
 
-    <section class="qol_categories" v-if="qol.categories">
+    <section class="qol_aggregate" v-if="aggregateScore">
+      <h4>Aggregate Score</h4>
+      <p class="aggregate_score_display">
+        {{ aggregateScore }}
+      </p>
+    </section>
+
+    <section class="qol_categories" v-if="categories">
       <CategoryDisplay
-        v-for="(category, index) in qol.categories"
+        v-for="(category, index) in categories"
         class="qol_category"
         :category="category"
         :key="`category_${index}_key`"
@@ -41,15 +48,24 @@ export default {
       lat: null,
       long: null,
       urbanAreaData: null,
-      qol: {
-        categories: null
-      }
+      categories: null,
+      aggregateScore: null
     }
   },
   computed: {
     ...mapState(['currentLocale']),
     basicInfoUrl () {
       return this.currentLocale ? this.currentLocale._links['city:item'].href : null
+    },
+    categoriesFound () {
+      return !!(this.categories && this.categories.length)
+    }
+  },
+  watch: {
+    categories () {
+      if (this.categoriesFound) {
+        this.computeAggregateScore()
+      }
     }
   },
   mounted () {
@@ -81,12 +97,28 @@ export default {
           console.log(error);
         });    
     },
+    computeAggregateScore () {
+      let vue = this
+      let sum = 0
+      if (this.categories) {
+        for( var i = 0; i < this.categories.length; i++ ){
+            sum += parseInt( vue.categories[i].score_out_of_10, 10 );
+        }
+
+        let avg = sum/this.categories.length
+
+        this.aggregateScore = this.roundScore(avg)
+      }
+    },
+    roundScore (rating) {
+      return Math.max( Math.round(rating * 10) / 10, 2.8 ).toFixed(2);
+    },
     getUrbanAreaInfo (urbanAreaDataUrl) {
       let vue = this
       axios.get(`${urbanAreaDataUrl}scores/`)
         .then(function (response) {
           let data = response.data || {}
-          vue.qol.categories = data.categories || null
+          vue.categories = data.categories || null
         })
         .catch(function (error) {
           console.log(error);
@@ -100,14 +132,16 @@ export default {
 @import '../../style/_palette.scss';
 @import '../../style/_mixins.scss';
 
+$maxWidth: 65%;
+
 .location_headline {
   color: $color1;
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
 .meta {
-  max-width: 65%;
+  max-width: $maxWidth;
   margin: 0 auto 2rem auto;
   
   span {
@@ -123,6 +157,25 @@ export default {
       width: auto;
     }
   }
+}
+
+.qol_aggregate {
+  @include opaque_el;
+  max-width: $maxWidth;
+  padding: 1rem;
+  margin: 1rem auto 1rem auto;
+
+  h4 {
+    text-shadow: none;
+    color: white;
+    margin: 1rem 0;
+  }
+}
+
+.aggregate_score_display {
+  font-size: 4rem;
+  color: white;
+  font-weight: bold;
 }
 
 .qol_categories {
