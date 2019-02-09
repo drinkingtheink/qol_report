@@ -10,13 +10,33 @@
     <p><button @click="updateCurrentLocale(null)"><i class="fas fa-redo"></i>Change City</button></p>
 
     <section class="qol_aggregate" v-if="aggregateScore">
-      <h4>
-        Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
-      </h4>
+      <div class="agg_tray aggregate_display">
+        <h4>
+          Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
+        </h4>
       
-      <p class="aggregate_score_display">
-        {{ aggregateScore }}
-      </p>
+        <span class="aggregate_score_display">{{ aggregateScore }}</span>
+      </div>
+
+      <div class="agg_tray top_categories">
+        <h4>Best Categories</h4>
+
+        <ul v-if="top3Categories" class="category_highlight"> 
+          <li v-for="category in top3Categories">
+            {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="agg_tray bottom_categories">
+        <h4>Worst Categories</h4>
+
+        <ul v-if="bottom3Categories" class="category_highlight"> 
+          <li v-for="category in bottom3Categories">
+            {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="qol_categories" v-if="categories">
@@ -64,8 +84,22 @@ export default {
       return !!(this.categories && this.categories.length)
     },
     shortName () {
-      return this.currentLocale && this.currentLocale.matching_alternate_names ? this.currentLocale.matching_alternate_names[0].name : null
-    }
+      return this.currentLocale ? this.currentLocale.matching_full_name.substr(0, this.currentLocale.matching_full_name.indexOf(',')) : null
+    },
+    sortedBotToTopCategories () {
+      let arrayToSort = this.categories ? this.categories.slice(0) : null
+      return arrayToSort ? arrayToSort.sort((a, b) => a - b) : null
+    },
+    bottom3Categories () {
+      return this.sortedBotToTopCategories ? this.sortedBotToTopCategories.slice(0, 3) : null
+    },
+    sortedTopToBotCategories () {
+      let arrayToSort = this.categories ? this.categories.slice(0) : null
+      return arrayToSort ? arrayToSort.sort((a, b) => a > b) : null
+    },
+    top3Categories () {
+      return this.sortedTopToBotCategories ? this.sortedTopToBotCategories.slice(0, 3) : null
+    },
   },
   watch: {
     categories () {
@@ -165,6 +199,8 @@ $maxWidth: 95%;
   max-width: $maxWidth;
   padding: 1rem;
   margin: 1rem auto 1rem auto;
+  display: flex;
+  justify-content: center;
 
   h4 {
     text-shadow: none;
@@ -188,5 +224,25 @@ $maxWidth: 95%;
 
 .qol_category {
   width: 25%;
+}
+
+ul.category_highlight {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+
+  li {
+    color: $grey2;
+    font-weight: bold;
+  }
+
+  .category_rating {
+    color: $color1;
+  }
+}
+
+.agg_tray {
+  padding-right: 3em;
 }
 </style>
