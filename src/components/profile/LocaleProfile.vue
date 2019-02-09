@@ -25,7 +25,7 @@
           <h4>Best Categories</h4>
 
           <ul v-if="top3Categories" class="category_highlight"> 
-            <li v-for="category in top3Categories">
+            <li v-for="(category, index) in top3Categories" :key="`top_${index}_key`">
               {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
             </li>
           </ul>
@@ -35,7 +35,7 @@
           <h4>Worst Categories</h4>
 
           <ul v-if="bottom3Categories" class="category_highlight"> 
-            <li v-for="category in bottom3Categories">
+            <li v-for="(category, index) in bottom3Categories" :key="`bot_${index}_key`">
               {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
             </li>
           </ul>
