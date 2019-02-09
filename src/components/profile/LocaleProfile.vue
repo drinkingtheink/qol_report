@@ -9,44 +9,46 @@
 
     <p><button @click="updateCurrentLocale(null)"><i class="fas fa-redo"></i>Change City</button></p>
 
-    <section class="qol_aggregate" v-if="aggregateScore">
-      <div class="agg_tray aggregate_display">
-        <h4>
-          Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
-        </h4>
-      
-        <span class="aggregate_score_display">{{ aggregateScore }}</span>
-      </div>
+    <section class="qol_stage">
+      <section class="qol_aggregate" v-if="aggregateScore">
+        <div class="agg_tray aggregate_display">
+          <h4>
+            Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
+          </h4>
+        
+          <span class="aggregate_score_display">{{ aggregateScore }}</span>
+        </div>
 
-      <div class="agg_tray top_categories">
-        <h4>Best Categories</h4>
+        <div class="agg_tray top_categories">
+          <h4>Best Categories</h4>
 
-        <ul v-if="top3Categories" class="category_highlight"> 
-          <li v-for="category in top3Categories">
-            {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
-          </li>
-        </ul>
-      </div>
+          <ul v-if="top3Categories" class="category_highlight"> 
+            <li v-for="category in top3Categories">
+              {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
+            </li>
+          </ul>
+        </div>
 
-      <div class="agg_tray bottom_categories">
-        <h4>Worst Categories</h4>
+        <div class="agg_tray bottom_categories">
+          <h4>Worst Categories</h4>
 
-        <ul v-if="bottom3Categories" class="category_highlight"> 
-          <li v-for="category in bottom3Categories">
-            {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
-          </li>
-        </ul>
-      </div>
-    </section>
+          <ul v-if="bottom3Categories" class="category_highlight"> 
+            <li v-for="category in bottom3Categories">
+              {{ category.name }} <span class="category_rating">{{ roundScore(category.score_out_of_10)}}</span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <section class="qol_categories" v-if="categories">
-      <CategoryDisplay
-        v-for="(category, index) in categories"
-        class="qol_category"
-        :category="category"
-        :key="`category_${index}_key`"
-      >
-      </CategoryDisplay>
+      <section class="qol_categories" v-if="categories">
+        <CategoryDisplay
+          v-for="(category, index) in categories"
+          class="qol_category"
+          :category="category"
+          :key="`category_${index}_key`"
+        >
+        </CategoryDisplay>
+      </section>
     </section>
 
     <button @click="updateCurrentLocale(null)">Find a Different City</button>
@@ -88,14 +90,17 @@ export default {
     },
     sortedBotToTopCategories () {
       let arrayToSort = this.categories ? this.categories.slice(0) : null
-      return arrayToSort ? arrayToSort.sort((a, b) => a - b) : null
+      let composedArray = arrayToSort ? arrayToSort.sort((a, b) => { return a.score_out_of_10 - b.score_out_of_10 }) : null
+      return composedArray ? composedArray : null
     },
     bottom3Categories () {
       return this.sortedBotToTopCategories ? this.sortedBotToTopCategories.slice(0, 3) : null
     },
     sortedTopToBotCategories () {
       let arrayToSort = this.categories ? this.categories.slice(0) : null
-      return arrayToSort ? arrayToSort.sort((a, b) => a > b) : null
+      let composedArray = arrayToSort ? arrayToSort.sort((a, b) => b.score_out_of_10 - a.score_out_of_10) : null
+      console.log(`TOP -> BOT: ${JSON.stringify(composedArray)}`)
+      return composedArray ? composedArray : null
     },
     top3Categories () {
       return this.sortedTopToBotCategories ? this.sortedTopToBotCategories.slice(0, 3) : null
@@ -210,7 +215,7 @@ $maxWidth: 95%;
 }
 
 .aggregate_score_display {
-  font-size: 4rem;
+  font-size: 5rem;
   color: white;
   font-weight: bold;
   color: $color1;
