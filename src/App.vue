@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Indicator />
     <LocaleSelect v-if="!currentLocale"/>
     <LocaleProfile v-else/>
   </div>
@@ -9,10 +10,12 @@
 import { mapState } from 'vuex'
 import LocaleSelect from './components/LocaleSelect.vue'
 import LocaleProfile from './components/profile/LocaleProfile.vue'
+import Indicator from './components/Indicator.vue'
 
 export default {
   name: 'app',
   components: {
+    Indicator,
     LocaleSelect,
     LocaleProfile
   },
@@ -33,6 +36,8 @@ body {
   height: 100%;
   width: 100%;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -46,7 +51,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   padding-bottom: 4em;
 }
 </style>

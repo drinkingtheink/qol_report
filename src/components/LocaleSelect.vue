@@ -3,10 +3,10 @@
     <h1>Search for a City</h1>
 
     <div class="search_input_wrapper">
+      <i class="fa fa-search search_icon"></i>
       <input v-model="searchTerm" class="search_term_input" :placeholder="placeholder" />
-    </div>
 
-    <section class="search_option_gallery" v-if="searchOptions">
+      <section class="search_option_gallery" v-if="searchOptions">
       <p class="search_options_header"><strong>{{ optionsCount }}</strong> options found</p>
       <CitySearchOption 
         v-for="(option, index) in searchOptions" 
@@ -14,6 +14,8 @@
         :option="option"
       ></CitySearchOption>
     </section>
+    </div>
+
   </div>
 </template>
 
@@ -79,12 +81,32 @@ $component_width: 70%;
 .city_search {
   h1 {
     color: $color1;
+    margin-bottom: 2rem;
   }
 }
 
 .search_input_wrapper {
   width: $component_width;
   margin: 0 auto;
+  position: relative;
+
+  .search_icon {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    opacity: .3;
+    font-size: 120%;
+  }
+
+  .search_term_input {
+    padding-left: 3rem;
+    border-radius: 5px;
+    border: none;
+
+    &::placeholder {
+      opacity: .5;
+    }
+  }
 }
 
 .search_options_header {
@@ -95,7 +117,7 @@ $component_width: 70%;
 
 .search_option_gallery {
   background-color: $grey1;
-  width: $component_width;
+  width: 100%;
   margin: 0 auto;
 }
 </style>

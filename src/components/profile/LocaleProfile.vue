@@ -7,7 +7,7 @@
       <span v-if="long">LONG: <strong>{{ long }}</strong></span>
     </p>
 
-    <p><button @click="updateCurrentLocale(null)"><i class="fas fa-redo"></i>Change City</button></p>
+    <p><button @click="updateCurrentLocale(null)"><i class="fa fa-map-marker"></i> Change City</button></p>
 
     <h4 class="section_header">Quality of Life</h4>
 
@@ -51,9 +51,14 @@
         >
         </CategoryDisplay>
       </section>
+
+      <section class="no_categories_found" v-else>
+        <h2>No Quality of Life data found. You may need to select a larger urban area.</h2>
+      </section>
+
     </section>
 
-    <button @click="updateCurrentLocale(null)">Find a Different City</button>
+    <button @click="updateCurrentLocale(null)"><i class="fa fa-map-marker"></i> Find a Different City</button>
   </section>
 </template>
 
@@ -101,7 +106,6 @@ export default {
     sortedTopToBotCategories () {
       let arrayToSort = this.categories ? this.categories.slice(0) : null
       let composedArray = arrayToSort ? arrayToSort.sort((a, b) => b.score_out_of_10 - a.score_out_of_10) : null
-      console.log(`TOP -> BOT: ${JSON.stringify(composedArray)}`)
       return composedArray ? composedArray : null
     },
     top3Categories () {
@@ -240,6 +244,13 @@ $maxWidth: 95%;
 
 .qol_category {
   width: 25%;
+}
+
+.no_categories_found {
+  color: $grey2;
+  background-color: $dark;
+  padding: 2rem 0;
+  margin: 0 0 1rem 0;
 }
 
 ul.category_highlight {
