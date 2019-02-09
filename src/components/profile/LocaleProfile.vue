@@ -9,6 +9,8 @@
 
     <p><button @click="updateCurrentLocale(null)"><i class="fas fa-redo"></i>Change City</button></p>
 
+    <h4 class="section_header">Quality of Life</h4>
+
     <section class="qol_stage">
       <section class="qol_aggregate" v-if="aggregateScore">
         <div class="agg_tray aggregate_display">
@@ -199,6 +201,15 @@ $maxWidth: 95%;
   }
 }
 
+
+.section_header {
+  font-size: 2.5rem;
+  color: $grey2;
+  background-color: $dark;
+  margin: 1rem 0;
+  padding: 1rem 0;
+}
+
 .qol_aggregate {
   @include opaque_el;
   max-width: $maxWidth;
@@ -250,4 +261,5 @@ ul.category_highlight {
 .agg_tray {
   padding-right: 3em;
 }
+
 </style>

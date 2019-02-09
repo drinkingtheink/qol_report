@@ -74,7 +74,7 @@ export default {
 <style lang="scss" scoped>
 @import '../style/_palette.scss';
 
-$component_width: 40%;
+$component_width: 70%;
 
 .city_search {
   h1 {
