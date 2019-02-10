@@ -12,7 +12,10 @@
       />
 
       <section class="search_option_gallery" v-if="searchOptions">
-        <p class="search_options_header"><strong>{{ optionsCount }}</strong> option{{ optionsCount > 1 ? 's' : '' }} found</p>
+        <p class="search_options_header">
+          <strong>{{ optionsCount }}</strong> option{{ optionsCount > 1 ? 's' : '' }} found | 
+          <span class="clear_search" @click="clearOutSearch()"> Clear Search <i class="fa fa-close"></i></span>
+        </p>
         <CitySearchOption 
           v-for="(option, index) in searchOptions" 
           :key="`option_number_${index}`"
@@ -77,6 +80,7 @@ export default {
     clearOutSearch () {
       this.searchOptions = null
       this.optionsCount = 0
+      this.setFocus()
     },
     searchForLocale (searchTerm) {
       let vue = this
@@ -151,6 +155,15 @@ $component_width: 70%;
   margin: 0 auto 0 .25rem;
   padding-bottom: 3rem;
   border-radius: 0 0 5px 5px;
+}
+
+.clear_search {
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    color: $color1;
+  }
 }
 
 </style>
