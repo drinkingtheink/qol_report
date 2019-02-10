@@ -10,6 +10,12 @@ const london = {"_links":{"city:item":{"href":"https://api.teleport.org/api/citi
 
 const tokyo = {"_links":{"city:item":{"href":"https://api.teleport.org/api/cities/geonameid:1850147/"}},"matching_alternate_names":[{"name":"Tokyo"},{"name":"tokyo"}],"matching_full_name":"Tokyo, Tokyo, Japan"}
 
+const shanghai = {"_links":{"city:item":{"href":"https://api.teleport.org/api/cities/geonameid:1796236/"}},"matching_alternate_names":[{"name":"Shanghai"},{"name":"Shanghai - shang hai"},{"name":"Shanghai - 上海"},{"name":"shanghay"}],"matching_full_name":"Shanghai, Shanghai, China"}
+
+const istanbul = {"_links":{"city:item":{"href":"https://api.teleport.org/api/cities/geonameid:745044/"}},"matching_alternate_names":[{"name":"İstanbul"},{"name":"Istanbul"}],"matching_full_name":"Istanbul, Istanbul, Turkey"}
+
+const moscow = {"_links":{"city:item":{"href":"https://api.teleport.org/api/cities/geonameid:524901/"}},"matching_alternate_names":[{"name":"Moscow"}],"matching_full_name":"Moscow, Moscow, Russia"}
+
 const staticLocaleOptions = [
   {
     name: 'Austin',
@@ -34,8 +40,19 @@ const staticLocaleOptions = [
   {
     name: 'Tokyo',
     data: tokyo
+  },
+  {
+    name: 'Shanghai',
+    data: shanghai
+  },
+  {
+    name: 'Istanbul',
+    data: istanbul
+  },
+  {
+    name: 'Moscow',
+    data: moscow
   }
 ]
-
 
 export { staticLocaleOptions }

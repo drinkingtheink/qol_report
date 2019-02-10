@@ -43,7 +43,7 @@ export default {
     return {
       searchTerm : null,
       searchOptions: null,
-      optionsCount: null,
+      optionsCount: 0,
       searchFeedback: null
     }
   },
@@ -60,9 +60,17 @@ export default {
       if (this.searchTerm.length > 2) {
         this.searchForLocale(this.searchTerm)
       }
+
+      if (!this.searchTerm) {
+        this.clearOutSearch()
+      }
     }
   },
   methods: {
+    clearOutSearch () {
+      this.searchOptions = null
+      this.optionsCount = 0
+    },
     searchForLocale (searchTerm) {
       let vue = this
       axios.get(`${searchUrl}${searchTerm}`)

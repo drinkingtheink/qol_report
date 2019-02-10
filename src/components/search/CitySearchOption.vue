@@ -8,8 +8,6 @@
 </template>
 
 <script>
-/* eslint no-console: 0, no-mixed-spaces-and-tabs: 0 */
-
 import { mapState, mapActions } from 'vuex'
 export default {
   props: ['option'],
