@@ -11,8 +11,8 @@
 
     <h4 class="section_header">Quality of Life</h4>
 
-    <section class="qol_stage">
-      <section class="qol_aggregate" v-if="aggregateScore">
+    <section class="qol_stage" v-if="categories">
+      <section class="qol_aggregate">
         <div class="agg_tray aggregate_display">
           <h4>
             Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
@@ -110,7 +110,7 @@ export default {
     },
     top3Categories () {
       return this.sortedTopToBotCategories ? this.sortedTopToBotCategories.slice(0, 3) : null
-    },
+    }
   },
   watch: {
     categories () {
@@ -162,7 +162,8 @@ export default {
       }
     },
     roundScore (rating) {
-      return Math.max( Math.round(rating * 10) / 10, 2.8 ).toFixed(2);
+      let ratingTo10th = Math.max( Math.round(rating * 10) / 10, 2.8 ).toFixed(2)
+      return ratingTo10th
     },
     getUrbanAreaInfo (urbanAreaDataUrl) {
       let vue = this

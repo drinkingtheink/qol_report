@@ -21,6 +21,11 @@ export default {
   },
   computed: {
     ...mapState(['currentLocale'])
+  },
+  watch: {
+    currentLocale () {
+      console.log(`LOCALE UPDATED }}}} ${JSON.stringify(this.currentLocale)}`)
+    }
   }
 };
 </script>
@@ -38,6 +43,7 @@ body {
   position: relative;
   margin: 0;
   padding: 0;
+  border-top: 3px solid $color1;
 }
 
 body {

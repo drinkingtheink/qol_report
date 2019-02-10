@@ -1,5 +1,5 @@
 <template>
-  <div class="indicator_stage">
+  <div class="indicator_stage" :class="stateClass">
     <i class="fa" :class="iconClass"></i>
     <span class="indicator"></span>
   </div>
@@ -14,6 +14,9 @@ export default {
     ...mapState(['currentLocale']),
     iconClass () {
       return this.currentLocale ? 'fa-globe' : 'fa-search'
+    },
+    stateClass () {
+      return this.currentLocale ? 'profile' : 'search'
     }
   }
 };
@@ -24,8 +27,9 @@ export default {
 
 .indicator_stage {
   position: relative;
-  height: 4em;
-  margin-bottom: 2rem;
+  height: .5rem;
+  margin-bottom: 6rem;
+  background-color: $dark;
 
   .indicator {
     display: inline-block;

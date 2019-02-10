@@ -7,13 +7,15 @@
       <input v-model="searchTerm" class="search_term_input" :placeholder="placeholder" />
 
       <section class="search_option_gallery" v-if="searchOptions">
-      <p class="search_options_header"><strong>{{ optionsCount }}</strong> options found</p>
-      <CitySearchOption 
-        v-for="(option, index) in searchOptions" 
-        :key="`option_number_${index}`"
-        :option="option"
-      ></CitySearchOption>
-    </section>
+        <p class="search_options_header"><strong>{{ optionsCount }}</strong> options found</p>
+        <CitySearchOption 
+          v-for="(option, index) in searchOptions" 
+          :key="`option_number_${index}`"
+          :option="option"
+        ></CitySearchOption>
+      </section>
+
+      <StaticLocaleOptions />
     </div>
 
   </div>
@@ -23,12 +25,14 @@
 /* eslint no-console: 0 */
 import axios from 'axios'
 import CitySearchOption from './search/CitySearchOption.vue'
+import StaticLocaleOptions from './search/StaticLocaleOptions.vue'
 const searchUrl = 'https://api.teleport.org/api/cities/?search='
 
 export default {
   name: 'LocaleSelect',
   components: {
-    CitySearchOption: CitySearchOption
+    CitySearchOption,
+    StaticLocaleOptions
   },
   data () {
     return {
@@ -56,7 +60,6 @@ export default {
       axios.get(`${searchUrl}${searchTerm}`)
         .then(function (response) {
           let callSuccess = response && response.data && response.data.count > 0
-          
           if (callSuccess) {
             let responseData = response.data || {}
             let embeddedData = responseData._embedded || {}
