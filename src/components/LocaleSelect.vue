@@ -20,6 +20,10 @@
         ></CitySearchOption>
       </section>
 
+      <section class="no_search_results" v-if="searchTerm && !optionsCount">
+        <h4>Sorry, no search results found. Try a different term.</h4>
+      </section>
+
       <StaticLocaleOptions />
     </div>
 
