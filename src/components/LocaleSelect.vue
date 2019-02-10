@@ -12,7 +12,7 @@
       />
 
       <section class="search_option_gallery" v-if="searchOptions">
-        <p class="search_options_header"><strong>{{ optionsCount }}</strong> options found</p>
+        <p class="search_options_header"><strong>{{ optionsCount }}</strong> option{{ optionsCount > 1 ? 's' : '' }} found</p>
         <CitySearchOption 
           v-for="(option, index) in searchOptions" 
           :key="`option_number_${index}`"
@@ -20,8 +20,8 @@
         ></CitySearchOption>
       </section>
 
-      <section class="no_search_results" v-if="searchTerm && !optionsCount">
-        <h4>Sorry, no search results found. Try a different term.</h4>
+      <section class="no_search_results" v-if="showNoSearchResultsMessage">
+        <h4><i class="fa fa-info-circle"></i> Sorry, no search results found. Try a different term.</h4>
       </section>
 
       <StaticLocaleOptions />
@@ -57,6 +57,9 @@ export default {
   computed: {
     placeholder () {
       return 'What city do you want to learn about?'
+    },
+    showNoSearchResultsMessage () {
+      return this.searchTerm && this.searchTerm.length > 2 && !this.optionsCount
     }
   },
   watch: {
@@ -149,4 +152,5 @@ $component_width: 70%;
   padding-bottom: 3rem;
   border-radius: 0 0 5px 5px;
 }
+
 </style>
