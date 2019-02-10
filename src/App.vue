@@ -21,11 +21,6 @@ export default {
   },
   computed: {
     ...mapState(['currentLocale'])
-  },
-  watch: {
-    currentLocale () {
-      console.log(`LOCALE UPDATED }}}} ${JSON.stringify(this.currentLocale)}`)
-    }
   }
 };
 </script>
