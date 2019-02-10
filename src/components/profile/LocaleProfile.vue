@@ -86,7 +86,7 @@ export default {
       urbanAreaData: null,
       categories: null,
       aggregateScore: null,
-      changeCTA: 'Chang City'
+      changeCTA: 'Change City'
     }
   },
   computed: {
