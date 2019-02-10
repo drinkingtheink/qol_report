@@ -25,8 +25,8 @@ export default {
 
 <style lang="scss" scoped>
 .city_search_option {
-  padding: 1rem;
-  border-bottom: rgba(#000, .1);
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(#000, .1);
 
   &:hover {
     font-weight: bold;

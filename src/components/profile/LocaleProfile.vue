@@ -7,13 +7,13 @@
       <span v-if="long">LONG: <strong>{{ long }}</strong></span>
     </p>
 
-    <p><button @click="updateCurrentLocale(null)"><i class="fa fa-map-marker"></i> Change City</button></p>
+    <p><button @click="updateCurrentLocale(null)"><i class="fa fa-map-marker"></i> {{ changeCTA }}</button></p>
 
     <h4 class="section_header">Quality of Life</h4>
 
-    <section class="qol_stage" v-if="categories">
+    <section class="qol_stage" v-if="categoriesFound">
       <section class="qol_aggregate">
-        <div class="agg_tray aggregate_display">
+        <div class="agg_tray aggregate_display" v-if="aggregateScore">
           <h4>
             Aggregate Score <span v-if="shortName"> for {{ shortName }}</span>
           </h4>
@@ -21,7 +21,7 @@
           <span class="aggregate_score_display">{{ aggregateScore }}</span>
         </div>
 
-        <div class="agg_tray top_categories">
+        <div class="agg_tray top_categories" v-if="top3Categories">
           <h4>Best Categories</h4>
 
           <ul v-if="top3Categories" class="category_highlight"> 
@@ -31,7 +31,7 @@
           </ul>
         </div>
 
-        <div class="agg_tray bottom_categories">
+        <div class="agg_tray bottom_categories" v-if="bottom3Categories">
           <h4>Worst Categories</h4>
 
           <ul v-if="bottom3Categories" class="category_highlight"> 
@@ -42,7 +42,7 @@
         </div>
       </section>
 
-      <section class="qol_categories" v-if="categories">
+      <section class="qol_categories" v-if="categoriesFound">
         <CategoryDisplay
           v-for="(category, index) in categories"
           class="qol_category"
@@ -52,13 +52,17 @@
         </CategoryDisplay>
       </section>
 
-      <section class="no_categories_found" v-else>
-        <h2>No Quality of Life data found. You may need to select a larger urban area.</h2>
-      </section>
-
     </section>
 
-    <button @click="updateCurrentLocale(null)"><i class="fa fa-map-marker"></i> Find a Different City</button>
+    <section class="no_categories_found" v-else>
+        <h2>No Quality of Life data found. You may need to select a larger urban area.</h2>
+
+        <div class="icon_stage">
+          <i class="fa fa-globe"></i>
+        </div>
+    </section>
+
+    <button @click="updateCurrentLocale(null)"><i class="fa fa-map-marker"></i> {{ changeCTA }}</button>
   </section>
 </template>
 
@@ -81,7 +85,8 @@ export default {
       long: null,
       urbanAreaData: null,
       categories: null,
-      aggregateScore: null
+      aggregateScore: null,
+      changeCTA: 'Chang City'
     }
   },
   computed: {
@@ -250,8 +255,18 @@ $maxWidth: 95%;
 .no_categories_found {
   color: $grey2;
   background-color: $dark;
-  padding: 2rem 0;
+  padding: 4rem 0;
   margin: 0 0 1rem 0;
+}
+
+.icon_stage {
+  text-align: center;
+
+  i {
+    font-size: 16rem;
+    opacity: .5;
+    color: $color1;
+  }
 }
 
 ul.category_highlight {

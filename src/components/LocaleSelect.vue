@@ -102,9 +102,9 @@ $component_width: 70%;
   }
 
   .search_term_input {
-    padding-left: 3rem;
     border-radius: 5px;
     border: none;
+    padding-left: 3rem;
 
     &::placeholder {
       opacity: .5;
@@ -120,7 +120,9 @@ $component_width: 70%;
 
 .search_option_gallery {
   background-color: $grey1;
-  width: 100%;
-  margin: 0 auto;
+  width: 106%;
+  margin: 0 auto 0 .25rem;
+  padding-bottom: 3rem;
+  border-radius: 0 0 5px 5px;
 }
 </style>
