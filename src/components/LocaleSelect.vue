@@ -4,7 +4,12 @@
 
     <div class="search_input_wrapper">
       <i class="fa fa-search search_icon"></i>
-      <input v-model="searchTerm" class="search_term_input" :placeholder="placeholder" />
+      <input 
+        v-model="searchTerm" 
+        class="search_term_input" 
+        :placeholder="placeholder" 
+        ref="search_term_input"
+      />
 
       <section class="search_option_gallery" v-if="searchOptions">
         <p class="search_options_header"><strong>{{ optionsCount }}</strong> options found</p>
@@ -42,6 +47,9 @@ export default {
       searchFeedback: null
     }
   },
+  mounted () {
+    this.setFocus()
+  },
   computed: {
     placeholder () {
       return 'What city do you want to learn about?'
@@ -71,6 +79,9 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
+    setFocus () {
+      this.$refs.search_term_input.focus();
     }
   }
 };
@@ -97,8 +108,9 @@ $component_width: 70%;
     position: absolute;
     left: 1rem;
     top: 1rem;
-    opacity: .3;
+    opacity: .6;
     font-size: 120%;
+    color: $grey3;
   }
 
   .search_term_input {
@@ -107,7 +119,7 @@ $component_width: 70%;
     padding-left: 3rem;
 
     &::placeholder {
-      opacity: .5;
+      opacity: .6;
     }
   }
 }
