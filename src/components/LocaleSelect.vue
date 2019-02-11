@@ -95,7 +95,7 @@ export default {
           }
         })
         .catch(function (error) {
-          console.log(error);
+          vue.searchFeedback = error
         });
     },
     setFocus () {

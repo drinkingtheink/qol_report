@@ -3,17 +3,18 @@
     <h4 class="name">{{category.name}}</h4>
     
     <div class="scale_tray">
-    	<span 
-    		class="scale_fill"
-    		:style="generatedStyles(category)"
-    	></span>
-    	<span class="rating">{{roundRating(category.score_out_of_10)}} </span>
+      <span
+        class="scale_fill"
+        :style="generatedStyles(category)"
+      ></span>
+      <span class="rating">{{roundRating(category.score_out_of_10)}} </span>
     </div>
     
   </div>
 </template>
 
 <script>
+/* eslint-disable  */
 export default {
   props: ['category'],
   name: 'CategoryDisplay',
