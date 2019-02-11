@@ -1,7 +1,7 @@
 <template>
   <section class="locale_profile">
-    <h1 class="location_headline">{{ currentLocale.matching_full_name }}</h1>
-    <p class="meta">
+    <h1 class="location_headline animated fadeInDown">{{ currentLocale.matching_full_name }}</h1>
+    <p class="meta animated fadeInDown">
       <span v-if="population" class="population">POPULATION: <strong>{{ Number(population).toLocaleString() }}</strong></span>
       <span v-if="lat">LAT: <strong>{{ lat }}</strong></span>
       <span v-if="long">LONG: <strong>{{ long }}</strong></span>
@@ -11,7 +11,7 @@
 
     <h4 class="section_header">Quality of Life</h4>
 
-    <section class="qol_stage" v-if="categoriesFound">
+    <section class="qol_stage animated fadeInUp" v-if="categoriesFound">
       <section class="qol_aggregate">
         <div class="agg_tray aggregate_display" v-if="aggregateScore">
           <h4>
@@ -54,7 +54,7 @@
 
     </section>
 
-    <section class="no_categories_found" v-else>
+    <section class="no_categories_found animated fadeIn" style="animation-delay: 1s;" v-else>
         <h2>No Quality of Life data found. You may need to select a larger urban area.</h2>
 
         <div class="icon_stage">

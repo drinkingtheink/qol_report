@@ -1,12 +1,13 @@
 <template>
   <section>
-    <h4>Or try one of these destinations...</h4>
+    <h4 class="animated fadeInDown" style="animation-delay: .3s;">Or try one of these destinations...</h4>
     
     <div class="static_locale_options">
       <div 
-        class="static_option"
-        v-for="option in staticLocaleOptions"
+        class="static_option animated fadeInDown"
+        v-for="(option, index) in staticLocaleOptions"
         :key="option.name"
+        :style="`animation-delay: ${index}00ms;`"
         @click="updateCurrentLocale(option.data)"
       >
         {{ option.name }}
@@ -28,7 +29,7 @@ export default {
   methods: {
     ...mapMutations(['updateCurrentLocale'])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

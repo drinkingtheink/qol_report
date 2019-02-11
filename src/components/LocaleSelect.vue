@@ -1,17 +1,17 @@
 <template>
   <div class="city_search">
-    <h1>Search for a City</h1>
+    <h1 class="animated fadeInDown search_header">Search for a City</h1>
 
     <div class="search_input_wrapper">
-      <i class="fa fa-search search_icon"></i>
+      <i class="fa fa-search search_icon" ></i>
       <input 
         v-model="searchTerm" 
-        class="search_term_input" 
+        class="search_term_input animated fadeInDown" 
         :placeholder="placeholder" 
         ref="search_term_input"
       />
 
-      <section class="search_option_gallery" v-if="searchOptions">
+      <section class="search_option_gallery animated fadeInDown" v-if="searchOptions">
         <p class="search_options_header">
           <strong>{{ optionsCount }}</strong> option{{ optionsCount > 1 ? 's' : '' }} found | 
           <span class="clear_search" @click="clearOutSearch()"> Clear Search <i class="fa fa-close"></i></span>
@@ -23,7 +23,7 @@
         ></CitySearchOption>
       </section>
 
-      <section class="no_search_results" v-if="showNoSearchResultsMessage">
+      <section class="no_search_results animated fadeInDown" v-if="showNoSearchResultsMessage">
         <h4><i class="fa fa-info-circle"></i> Sorry, no search results found. Try a different term.</h4>
       </section>
 
@@ -125,6 +125,7 @@ $component_width: 70%;
 
   .search_icon {
     position: absolute;
+    z-index: 10;
     left: 1rem;
     top: 1rem;
     opacity: .6;
@@ -151,7 +152,7 @@ $component_width: 70%;
 
 .search_option_gallery {
   background-color: $grey1;
-  width: 106%;
+  width: 102%;
   margin: 0 auto 0 .25rem;
   padding-bottom: 3rem;
   border-radius: 0 0 5px 5px;
