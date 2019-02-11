@@ -1,6 +1,6 @@
 <template>
   <div class="city_search">
-    <h1 class="animated fadeInDown search_header">Search for a City</h1>
+    <h1 class="animated fadeInDown search_header">Quality of Life Report</h1>
 
     <div class="search_input_wrapper">
       <i class="fa fa-search search_icon" ></i>
@@ -34,7 +34,6 @@
 </template>
 
 <script>
-/* eslint no-console: 0 */
 import axios from 'axios'
 import CitySearchOption from './search/CitySearchOption.vue'
 import StaticLocaleOptions from './search/StaticLocaleOptions.vue'
@@ -59,7 +58,7 @@ export default {
   },
   computed: {
     placeholder () {
-      return 'What city do you want to learn about?'
+      return 'What city do you want to research?'
     },
     showNoSearchResultsMessage () {
       return this.searchTerm && this.searchTerm.length > 2 && !this.optionsCount

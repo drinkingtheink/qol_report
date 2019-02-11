@@ -14,8 +14,6 @@
 </template>
 
 <script>
-/* eslint no-console: 0, no-mixed-spaces-and-tabs: 0 */
-
 export default {
   props: ['category'],
   name: 'CategoryDisplay',
