@@ -28,7 +28,7 @@ export default {
 .indicator_stage {
   position: relative;
   height: .5rem;
-  margin-bottom: 6rem;
+  margin-bottom: 8rem;
   background-color: $dark;
 
   .indicator {

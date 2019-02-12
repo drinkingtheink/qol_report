@@ -4,7 +4,7 @@
     
     <div class="static_locale_options">
       <div 
-        class="static_option animated fadeInDown"
+        class="static_option animated fadeIn"
         v-for="(option, index) in staticLocaleOptions"
         :key="option.name"
         :style="`animation-delay: ${index}00ms;`"
