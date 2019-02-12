@@ -1,6 +1,6 @@
 # Quality of Life Report
 
-## An exploration of Quality of Life and other data about Urban Areas, using Vue.js and Teleport API.
+## An exploration of Quality of Life and other data about Urban Areas, using [Vue.js](https://vuejs.org/) and [Teleport API](https://developers.teleport.org/api/resources/UrbanArea/).
 
 ## Project setup
 ```
