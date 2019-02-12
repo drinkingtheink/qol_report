@@ -3,7 +3,7 @@
     <h1 class="animated fadeInDown search_header">Quality of Life Report</h1>
 
     <div class="search_input_wrapper">
-      <i class="fa fa-search search_icon" ></i>
+      <i class="fa fa-search search_icon animated fadeInDown" ></i>
       <input 
         v-model="searchTerm" 
         class="search_term_input animated fadeInDown" 
@@ -11,7 +11,7 @@
         ref="search_term_input"
       />
 
-      <section class="search_option_gallery animated fadeInDown" v-if="searchOptions">
+      <section class="search_option_gallery animated fadeIn" v-if="searchOptions">
         <p class="search_options_header">
           <strong>{{ optionsCount }}</strong> option{{ optionsCount > 1 ? 's' : '' }} found | 
           <span class="clear_search" @click="clearOutSearch()"> Clear Search <i class="fa fa-close"></i></span>
@@ -20,6 +20,8 @@
           v-for="(option, index) in searchOptions" 
           :key="`option_number_${index}`"
           :option="option"
+          class="animated fadeIn"
+          :style="`animation-delay: .${index}00ms`"
         ></CitySearchOption>
       </section>
 
