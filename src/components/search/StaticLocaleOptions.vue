@@ -49,6 +49,7 @@ export default {
   margin: 0 .5rem .5rem 0;
   font-weight: bold;
   text-transform: uppercase;
+  color: rgba($color1, .7);
 
   &:hover {
     cursor: pointer;
